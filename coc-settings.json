@@ -1,0 +1,60 @@
+{
+  "suggest.noselect": false,
+  "diagnostic.errorSign": "✘",
+  "diagnostic.warningSign": "!",
+  "diagnostic.infoSign": "?",
+  "diagnostic.checkCurrentLine": true,
+  "workspace.bottomUpFiletypes": ["go"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "html",
+    "json",
+    "css",
+    "scss",
+    "ts",
+    "typescript",
+    "typescriptreact",
+    "go"
+  ],
+  "suggest.floatEnable": true,
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["doc.go", ".gitignore", "go.mod", ".vim/", ".git/"],
+      "usePlaceholders": true,
+      "disableDynamicRegister": false,
+      "disableDiagnostics": false,
+      "initializationOptions": {
+        "experimentalWatchedFileDelay": "800ms",
+        "directoryFilters": [
+          "-vendor",
+          "-/usr/local/Cellar/",
+          "-/Users/yonghao.hu/mycode/go_dir_path/src/gitlab.myteksi.net/gophers/go/vendor",
+          "-/Users/yonghao.hu/mycode/go_dir_path/src/gitlab.myteksi.net/gophers/go"
+        ],
+        "expandWorkspaceToModule": false,
+        "memoryMode": "DegradeClosed"
+      },
+      "args": [
+        "-vv",
+        "serve",
+        "-logfile",
+        "/tmp/o.txt",
+        "-debug",
+        "0.0.0.0:8484",
+        "-rpc.trace"
+      ],
+      "trace.server": "verbose",
+      "filetypes": ["go"]
+    }
+  },
+  "python.linting.pylintEnable": false,
+  "diagnostic.displayByAle": true
+}
