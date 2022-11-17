@@ -40,8 +40,7 @@ require'navigator'.setup({
             directoryFilters = {
                 "-vendor",
                 "-/usr/local/Cellar/",
-                "-/Users/yonghao.hu/mycode/go_dir_path/src/gitlab.myteksi.net/gophers/go/vendor",
-                "-/Users/yonghao.hu/mycode/go_dir_path/src/gitlab.myteksi.net/gophers/go",
+                "-go",
             },
             expandWorkspaceToModule = false,
             -- memoryMode = "DegradeClosed",

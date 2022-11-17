@@ -6,51 +6,56 @@ function! Cond(cond, ...)
 endfunction
     " Plugins will be downloaded under the specified directory.
     call plug#begin('~/.vim/plugged')
-    " Declare the list of plugins.
-    " Plug 'MarcWeber/vim-addon-mw-utils'
-    " Plug 'tomtom/tlib_vim' "Some utility functions for VIM
-    " Plug 'voldikss/vim-floaterm'
     Plug 'mileszs/ack.vim' , { 'on': [] }
     " 'on':[] 在 vim-plug 中表示不加载该插件
     Plug 'junegunn/fzf.vim' , { 'on': [] }
-    " Plug 'ludovicchabant/vim-gutentags' , { 'on': [] } "A Vim plugin that manages your tag files
     Plug 'kshenoy/vim-signature' , { 'on': [] } "Plugin to toggle, display and navigate marks
-    Plug 'luochen1990/rainbow'
-    Plug 'sainnhe/gruvbox-material'
+    " Plug 'luochen1990/rainbow'
+    " Plug 'sainnhe/gruvbox-material'
     Plug 'rhysd/conflict-marker.vim'
     Plug 'jiangmiao/auto-pairs', { 'on': [] }
     Plug 'airblade/vim-gitgutter' , { 'on': [] } " A Vim plugin which shows git diff markers in the sign column and stages/previews/undoes hunks and partial hunks.
     Plug 'vim-scripts/restore_view.vim', { 'on': [] }
     Plug 'alfredodeza/jacinto.vim', { 'for': 'json' }
     Plug 'tpope/vim-commentary'  , { 'on': [] } "comment stuff out
-    Plug 'preservim/vimux'
+    Plug 'benmills/vimux' " reply by delve
     Plug 'sebdah/vim-delve'
-    Plug 'tyru/undoclosewin.vim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'dense-analysis/ale' , { 'on': [] }
-    Plug 'elixir-editors/vim-elixir'
-    Plug 'blueyed/vim-diminactive'
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'dense-analysis/ale' , { 'on': [] }
+    " Plug 'elixir-editors/vim-elixir'
+    " Plug 'blueyed/vim-diminactive'
     " Plug 'tweekmonster/startuptime.vim'
     Plug 'vim-airline/vim-airline'
-    " Plug 'mhinz/vim-startify'
-    Plug 'sukima/vim-tiddlywiki'
-    Plug 'chrisbra/csv.vim'
     Plug 'ruanyl/vim-gh-line'
     Plug 'Vimjas/vim-python-pep8-indent'
+
     if has('nvim')
+        Plug 'rose-pine/neovim'
+        Plug 'mfussenegger/nvim-lint'
+        Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+        Plug 'nathom/filetype.nvim'
+        Plug 'phaazon/hop.nvim'
+        Plug 'romainl/vim-cool'
+        Plug 'rcarriga/nvim-notify'
         Plug 'j-hui/fidget.nvim'
         Plug 'kyazdani42/nvim-web-devicons'
         Plug 'goolord/alpha-nvim'
+
+"{
         Plug 'neovim/nvim-lspconfig'
         Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
         Plug 'ray-x/navigator.lua'
+        Plug 'hrsh7th/nvim-cmp'
+        Plug 'hrsh7th/cmp-nvim-lsp'
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+        Plug 'onsails/lspkind-nvim'
+"}
+        Plug 'nvim-tree/nvim-tree.lua'
         Plug 'krivahtoo/silicon.nvim', { 'do': './install.sh' }
         Plug 'p00f/nvim-ts-rainbow'
-        Plug 'APZelos/blamer.nvim'
         Plug 'folke/twilight.nvim'
         Plug 'andymass/vim-matchup'
         Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
         Plug 'romgrk/nvim-treesitter-context'
         " dependencies
         Plug 'nvim-lua/popup.nvim'
@@ -59,6 +64,7 @@ endfunction
         Plug 'nvim-telescope/telescope.nvim'
         Plug 'bfredl/nvim-miniyank'
         Plug 'sbdchd/neoformat'
+
     endif
     Plug 'mbbill/undotree'
 
@@ -71,12 +77,11 @@ endfunction
     function! LoadPlug(timer) abort
       " 手动加载
       call plug#load('ack.vim')
-      call plug#load('auto-pairs')
       call plug#load('fzf.vim')
       call plug#load('vim-signature')
       call plug#load('vim-gitgutter')
       call plug#load('vim-commentary')
-      call plug#load('ale')
+      " call plug#load('ale')
     endfunction
 "}
 
@@ -169,7 +174,6 @@ endfunction
         set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
 
         " To disable views add the following to your .vimrc.before.local file:
-        "   let g:spf13_no_views = 1
         if !exists('g:spf13_no_views')
             " Add exclusions to mkview and loadview
             " eg: *.*, svn-commit.tmp
@@ -182,22 +186,17 @@ endfunction
 " }
 
 " Vim UI {
-    " let g:gruvbox_contrast_dark = 'soft'
-    " let g:gruvbox_contrast_light = 'soft'
-    " let g:gruvbox_italic = 1
-    " let g:gruvbox_italicize_strings = 1
     "
-    "
-    let g:gruvbox_material_background = 'soft'
-    set background=dark
-    let g:gruvbox_material_enable_italic = 1
-    let g:gruvbox_material_disable_italic_comment = 0
-    let g:gruvbox_material_enable_bold = 1
-    let g:gruvbox_material_visual = 'reverse'
-    let g:gruvbox_material_diagnostic_line_highlight = 1
-    let g:gruvbox_material_current_word = 'bold'
-    let g:gruvbox_material_better_performance = 1
-    color gruvbox-material "solarized             " Load a colorscheme
+    " let g:gruvbox_material_background = 'soft'
+    " set background=dark
+    " let g:gruvbox_material_enable_italic = 1
+    " let g:gruvbox_material_disable_italic_comment = 0
+    " let g:gruvbox_material_enable_bold = 1
+    " let g:gruvbox_material_visual = 'reverse'
+    " let g:gruvbox_material_diagnostic_line_highlight = 1
+    " let g:gruvbox_material_current_word = 'bold'
+    " let g:gruvbox_material_better_performance = 1
+    " color gruvbox-material "solarized             " Load a colorscheme
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
@@ -421,41 +420,7 @@ endfunction
 " Plugins {
     " Ctags {
         set tags=./tags;/,~/.vimtags
-
-        " Make tags placed in .git/tags file available in all levels of a repository
-        " let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-        " if gitroot != ''
-        "     let &tags = &tags . ',' . gitroot . '/.git/tags'
-        " endif
-    " }
-
-    " NerdTree {
-        " if isdirectory(expand("~/.vim/bundle/nerdtree"))
-        "     map <C-e> <plug>NERDTreeTabsToggle<CR>
-        "     map <leader>w :NERDTreeFind<CR>
-        "     nmap <leader>nt :NERDTreeFind<CR>
-
-        "     let NERDTreeShowBookmarks=1
-        "     let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-        "     let NERDTreeChDirMode=0
-        "     let NERDTreeQuitOnOpen=1
-        "     let NERDTreeMouseMode=2
-        "     let NERDTreeShowHidden=1
-        "     let NERDTreeKeepTreeInNewTab=1
-        "     let g:nerdtree_tabs_open_on_gui_startup=0
-        " endif
-    " }
-
-        " UndoTree {
-        " if isdirectory(expand("~/.vim/bundle/undotree/"))
-        "     nnoremap <Leader>u :UndotreeToggle<CR>
-        "     " If undotree is opened, it is likely one wants to interact with it.
-        "     let g:undotree_SetFocusWhenToggle=1
-        " endif
-        " }
-
         " Functions {
-
         " Initialize directories {
         function! InitializeDirectories()
             let parent = $HOME
@@ -495,20 +460,6 @@ endfunction
             endfor
         endfunction
         call InitializeDirectories()
-        " }
-
-        " Initialize NERDTree as needed {
-        function! NERDTreeInitAsNeeded()
-            redir => bufoutput
-            buffers!
-            redir END
-            let idx = stridx(bufoutput, "NERD_tree")
-            if idx > -1
-                NERDTreeMirror
-                NERDTreeFind
-                wincmd l
-            endif
-        endfunction
         " }
 
         " Strip whitespace {
@@ -680,35 +631,6 @@ let g:go_highlight_operators = 1
 
 set modifiable
 set autowrite
-
-" let g:tagbar_type_go = {
-"     \ 'ctagstype' : 'go',
-"     \ 'kinds'     : [
-"         \ 'p:package',
-"         \ 'i:imports:1',
-"         \ 'c:constants',
-"         \ 'v:variables',
-"         \ 't:types',
-"         \ 'n:interfaces',
-"         \ 'w:fields',
-"         \ 'e:embedded',
-"         \ 'm:methods',
-"         \ 'r:constructor',
-"         \ 'f:functions'
-"     \ ],
-"     \ 'sro' : '.',
-"     \ 'kind2scope' : {
-"         \ 't' : 'ctype',
-"         \ 'n' : 'ntype'
-"     \ },
-"     \ 'scope2kind' : {
-"         \ 'ctype' : 't',
-"         \ 'ntype' : 'n'
-"     \ },
-"     \ 'ctagsbin'  : 'gotags',
-"     \ 'ctagsargs' : '-sort -silent'
-" \ }
-
 
 set lazyredraw
 set ttyfast
@@ -919,75 +841,80 @@ nnoremap <silent> <C-w>[ :wincmd W <bar> :Zoom<CR>
 nnoremap <silent> <C-w>] :wincmd w <bar> :Zoom<CR>
 set colorcolumn=
 
-"==========================
-" COC vim
-"==========================
-" Give more space for displaying messages.
-set cmdheight=2
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+""==========================
+"" COC vim
+""==========================
+"" Give more space for displaying messages.
+"set cmdheight=2
+"" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+"" delays and poor user experience.
+"set updatetime=300
+"" Don't pass messages to |ins-completion-menu|.
+"set shortmess+=c
 
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+"" Use tab for trigger completion with characters ahead and navigate.
+"" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+"" other plugin before putting this into your config.
+"inoremap <silent><expr> <TAB>
+"      \ coc#pum#visible() ? coc#pum#next(1):
+"      \ CheckBackspace() ? "\<Tab>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"" Make <CR> to accept selected completion item or notify coc.nvim to format
+"" <C-g>u breaks current undo, please make your own choice.
+"inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+"" Symbol renaming.
+"nmap <leader>rn <Plug>(coc-rename)
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+"function! s:show_documentation()
+"  if (index(['vim','help'], &filetype) >= 0)
+"    execute 'h '.expand('<cword>')
+"  elseif (coc#rpc#ready())
+"    call CocActionAsync('doHover')
+"  else
+"    execute '!' . &keywordprg . " " . expand('<cword>')
+"  endif
+"endfunction
 
 
 
-"==========================
-" airline
-"==========================
+"augroup mygroup
+"  autocmd!
+"  " Setup formatexpr specified filetype(s).
+"  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"  " Update signature help on jump placeholder.
+"  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+"augroup end
+
+"" Apply AutoFix to problem on the current line.
+"nmap <leader>qf  <Plug>(coc-fix-current)
+
+
+"" " Use <C-l> for trigger snippet expand.
+"" imap <C-l> <Plug>(coc-snippets-expand)
+
+"" " Use <C-j> for select text for visual placeholder of snippet.
+"" vmap <C-j> <Plug>(coc-snippets-select)
+
+"let g:airline#extensions#coc#enabled = 0
+"let g:airline#extensions#hunks#coc_git = 0
+
+"" autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+"let g:coc_disable_transparent_cursor = 1
+
+
+""==========================
+"" airline
+""==========================
 let g:airline#extensions#ale#enabled = 1
 let g:airline_experimental = 1
 let g:airline#extensions#fzf#enabled = 1
@@ -1004,8 +931,6 @@ let g:airline#extensions#default#layout = [
             \ ]
 
 
-let g:airline#extensions#coc#enabled = 0
-let g:airline#extensions#hunks#coc_git = 0
 
 "https://github.com/ludovicchabant/vim-gutentags/issues/88
 function! ShouldEnableGutentags(path) abort
@@ -1073,8 +998,6 @@ set nowrapscan
 
 hi LineNr ctermbg=241 guifg=#665c54
 let g:ftplugin_sql_omni_key = '<Plug>DisableSqlOmni'
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
-let g:coc_disable_transparent_cursor = 1
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 
@@ -1115,7 +1038,7 @@ Shortcut (Nvim Fold) Folds all
       \ nmap <silent> zM zM
 
 Shortcut (COC) Files explorer
-      \ nnoremap <silent> <Space>e :execute 'CocCommand explorer'<CR>
+      \ nnoremap <silent> <Space>e :NvimTreeToggle<CR>
 
 Shortcut (Complie) Compile file
       \ nnoremap <silent> <Space>c : call CompileRun()<CR>
@@ -1123,46 +1046,56 @@ Shortcut (Complie) Compile file
 Shortcut (Vim) set Ignore case in search patterns.
       \ nnoremap <silent> <Space>i : set ic<CR>
 Shortcut (Vim) set Ignore case in search patterns.
-      \ nnoremap <silent> <Space>r :execute 'source ~/.vimrc'<CR>
+      \ nnoremap <silent> <Space>rr :execute 'source ~/.vimrc'<CR>
+Shortcut (Vim) set Refresh neovim config.
+      \ nnoremap <silent> <Space>r :source ~/.config/nvim/init.vim<CR>
 
 
-" Use `[w` and `]w` to navigate diagnostics
-Shortcut (Coc) Go to previous diagnostic callout.
-      \ nmap <silent> [g <Plug>(coc-diagnostic-prev)
-Shortcut (Coc) Go to next diagnostic callout.
-      \ nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" " Use `[w` and `]w` to navigate diagnostics
+" Shortcut (Coc) Go to previous diagnostic callout.
+"       \ nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" Shortcut (Coc) Go to next diagnostic callout.
+"       \ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Remap keys for gotos
-Shortcut (Coc) Open the definition of the symbol under the cursor.
-      \ nmap <silent> gd <Plug>(coc-definition)
-Shortcut (Coc) Open the type definition of the symbol under the cursor.
-      \ nmap <silent> gy <Plug>(coc-type-definition)
-Shortcut (Coc) Open the implementation of the symbol under the cursor.
-      \ nmap <silent> gi <Plug>(coc-implementation)
-Shortcut (Coc) Open the references of the symbol under the cursor.
-      \ nmap <silent> gr <Plug>(coc-references)
+" " Remap keys for gotos
+" Shortcut (Coc) Open the definition of the symbol under the cursor.
+"       \ nmap <silent> cgd <Plug>(coc-definition)
+" Shortcut (Coc) Open the type definition of the symbol under the cursor.
+"       \ nmap <silent> cgy <Plug>(coc-type-definition)
+" Shortcut (Coc) Open the implementation of the symbol under the cursor.
+"       \ nmap <silent> cgi <Plug>(coc-implementation)
+" Shortcut (Coc) Open the references of the symbol under the cursor.
+"       \ nmap <silent> cgr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
-Shortcut! K (Coc) Open the documentation of the symbol under the cursor.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" " Use K to show documentation in preview window
+" Shortcut! K (Coc) Open the documentation of the symbol under the cursor.
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" Remap for rename current word
-Shortcut (Coc) Rename the symbol under the cursor.
-      \ nmap <Space>qn <Plug>(coc-rename)
+" " Remap for rename current word
+" Shortcut (Coc) Rename the symbol under the cursor.
+"       \ nmap <Space>qn <Plug>(coc-rename)
 
-" Remap for format selected region
-Shortcut (Coc) Format the selected region of code.
-      \ xmap <Space>qv  <Plug>(coc-format-selected)
-      \|nmap <Space>qv  <Plug>(coc-format-selected)
+" " Remap for format selected region
+" Shortcut (Coc) Format the selected region of code.
+"       \ xmap <Space>qv  <Plug>(coc-format-selected)
+"       \|nmap <Space>qv  <Plug>(coc-format-selected)
 
 
-" ALE
-Shortcut (Ale) previous error
-      \ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-Shortcut (Ale) next error
-      \ nmap <silent> <C-j> <Plug>(ale_next_wrap)
-     
+" " ALE
+" Shortcut (Ale) previous error
+"       \ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" Shortcut (Ale) next error
+"       \ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+" HOP
+Shortcut (Hop) hop word
+      \ nnoremap <silent> <C-j> :HopWord<CR>
+Shortcut (Hop) hop pattern
+      \ nnoremap <silent> <C-l> :HopPattern<CR>
+
+" Undo
+Shortcut (Hop) hop pattern
+      \ nnoremap <silent> <C-u>  :UndotreeToggle<CR>
 
 let g:conflict_marker_enable_mappings = 0
 Shortcut (conflict-marker) resolve merge conflict by keeping their version
@@ -1188,4 +1121,6 @@ Shortcut fallback to shortcut menu on partial entry
 " fold ""
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-autocmd BufReadPost,FileReadPost * normal zR
+" autocmd BufReadPost,FileReadPost * normal zR
+
+let g:CoolTotalMatches = 1

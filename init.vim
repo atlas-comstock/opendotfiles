@@ -47,10 +47,10 @@ require("toggleterm").setup{
 }
 
 
+require'lsp/treesitter'
 require"lsp/nvim-lsp"
 require'lsp/nvim-cmp'
 require"lsp/linters"
-require'lsp/treesitter'
 -- examples for your init.lua
 
 -- disable netrw at the very start of your init.lua (strongly advised)
